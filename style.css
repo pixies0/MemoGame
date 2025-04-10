@@ -1,117 +1,253 @@
-body {
-    font-family: 'Underdog', cursive, sans-serif;
-    background-color: #0a0a1a;
-    color: #f0e6d2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+:root {
+  --card-size: 100px;
 }
 
-.game-container {
-    background-color: #1e2328;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    text-align: center;
-    max-width: 800px;
-    border: 1px solid #463714;
+body {
+  font-family: "Underdog", cursive, sans-serif;
+  background-color: #0a0a1a;
+  color: #f0e6d2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
 }
 
 h1 {
-    font-family: 'Underdog', cursive;
-    color: #c8aa6e;
-    text-shadow: 0 0 5px rgba(200, 170, 110, 0.5);
+  color: #c8aa6e;
+  text-shadow: 0 0 5px rgba(200, 170, 110, 0.5);
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-top: 0;
 }
 
-.stats, #restart {
-    font-family: 'Underdog', cursive;
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.game-container {
+  flex-grow: 1;
+  background-color: #1e2328;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  text-align: center;
+  max-width: 800px;
+  border: 1px solid #463714;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.game-header h1 {
+  margin: 0;
+}
+
+.timer-container {
+  position: sticky;
+  top: 20px;
+  min-width: 100px;
+}
+
+.timer {
+  background-color: #010a13;
+  border: 2px solid #c8aa6e;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-family: "Underdog", cursive;
+  font-size: 1.2rem;
+  color: #f0e6d2;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(200, 170, 110, 0.3);
+  position: sticky;
+  top: 20px;
+  background: linear-gradient(145deg, #1e2328, #010a13);
+  padding-left: 20px;
+  padding-right: 30px;
+}
+
+.difficulty-selector {
+  margin-bottom: 20px;
+}
+
+.difficulty-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.difficulty-options button {
+  padding: 8px 16px;
+  background-color: #785a28;
+  color: #f0e6d2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Underdog", cursive;
+  transition: all 0.3s;
+}
+
+.difficulty-options button:hover {
+  background-color: #c8aa6e;
+  color: #1e2328;
+}
+
+.difficulty-options button.active {
+  background-color: #c8aa6e;
+  color: #1e2328;
+  box-shadow: 0 0 5px #f0e6d2;
+  transform: scale(1.05);
 }
 
 .stats {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    color: #f0e6d2;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  color: #f0e6d2;
+  font-size: 1.2rem;
 }
 
 .memory-board {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin: 0 auto;
-    max-width: 500px;
+  display: grid;
+  gap: 10px;
+  margin: 0 auto;
+  justify-content: center;
+  transition: grid-template-columns 0.3s ease;
 }
 
 .card {
-    width: 100px;
-    height: 100px;
-    background-color: #010a13;
-    border-radius: 5px;
-    border: 1px solid #463714;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    transform-style: preserve-3d;
-    position: relative;
-    overflow: hidden;
+  width: var(--card-size);
+  height: var(--card-size);
+  background-color: #010a13;
+  border-radius: 5px;
+  border: 1px solid #463714;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
 }
 
 .card::before {
-    content: '?';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: #c8aa6e;
-    background-color: #010a13;
-    transition: opacity 0.3s;
+  content: "?";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: #c8aa6e;
+  background-color: #010a13;
+  transition: opacity 0.3s;
+  z-index: 2;
 }
 
 .card.flipped::before {
-    opacity: 0;
+  opacity: 0;
 }
 
 .card .champion-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.3s;
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 3px;
 }
 
 .card.flipped .champion-img {
-    opacity: 1;
+  opacity: 1;
 }
 
 .card.matched {
-    background-color: #005a82;
-    box-shadow: 0 0 10px #0099ff;
+  background-color: #005a82;
+  box-shadow: 0 0 10px #0099ff;
+  cursor: default;
 }
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #c8aa6e;
+.card:hover:not(.matched) {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #c8aa6e;
 }
 
 #restart {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #785a28;
-    color: #f0e6d2;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #785a28;
+  color: #f0e6d2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Underdog", cursive;
+  transition: all 0.3s;
 }
 
 #restart:hover {
-    background-color: #c8aa6e;
-    color: #1e2328;
+  background-color: #c8aa6e;
+  color: #1e2328;
+  transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  :root {
+    --card-size: 80px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .main-container {
+    flex-direction: column;
+  }
+
+  .game-container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .timer-container {
+    width: 100%;
+    position: static;
+    margin-bottom: 15px;
+  }
+
+  .timer {
+    position: static;
+    display: inline-block;
+    clip-path: none;
+    border-left: 2px solid #c8aa6e;
+    border-bottom: 2px solid #c8aa6e;
+    padding: 10px 15px;
+  }
+
+  .difficulty-options {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .difficulty-options button {
+    width: 80%;
+  }
 }
